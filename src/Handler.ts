@@ -13,7 +13,7 @@ export default class Handler {
     }
 
     private async starReposInResponse(responses: OctoResponse[]) {
-        console.log(responses.length)
+        console.log(`Repos length> ${responses.length}`)
         for (const response of responses) {
             let repo = this.getRepoFromResponse(response);
             if (!await this.isRepoAlreadyStared(repo)) {
@@ -59,7 +59,7 @@ export default class Handler {
             data: {login},
         } = await octokit.rest.users.getAuthenticated();
         this.increaseRequestCount();
-        console.log("Logged in as, %s", login);
+        console.log("Log in> Successfully logged in as, %s", login);
 
         return octokit;
     }
