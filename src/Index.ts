@@ -1,3 +1,4 @@
-import { Octokit } from "octokit";
+import Handler from "./Handler";
 
-new Octokit({});
+
+new Handler().handle();
