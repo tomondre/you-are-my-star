@@ -15,11 +15,7 @@ export default class Handler {
     private async starReposInResponse(responses: OctoResponse[]) {
         console.log(responses.length)
         for (const response of responses) {
-            let repo: Repo = {
-                repo: "raspberry-kubernetes-cluster",
-                owner: "tomondre"
-            };
-            repo = this.getRepoFromResponse(response);
+            let repo = this.getRepoFromResponse(response);
             if (!await this.isRepoAlreadyStared(repo)) {
                 await this.waitRandom();
                 await this.starRepo(repo);
