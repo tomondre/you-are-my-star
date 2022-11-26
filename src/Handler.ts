@@ -21,6 +21,7 @@ export default class Handler {
             };
             repo = this.getRepoFromResponse(response);
             if (!await this.isRepoAlreadyStared(repo)) {
+                await this.waitRandom();
                 await this.starRepo(repo);
             }
         }
@@ -78,11 +79,30 @@ export default class Handler {
     private async starRepo(repo: Repo) {
         try {
             this.increaseRequestCount()
-            let any = await this.octokit.rest.activity.starRepoForAuthenticatedUser({...repo, headers: {"Content-Length": "0"}});
+            await this.octokit.rest.activity.starRepoForAuthenticatedUser({...repo, headers: {"Content-Length": "0"}});
             console.log(`Successfully stared> ${JSON.stringify(repo)}`)
         } catch (e) {
             console.log(`Error Starring> ${JSON.stringify(e)}`)
         }
+    }
+
+    private async waitRandom(): Promise<void> {
+        let randomNumber = this.random(1000, 20000);
+        await this.waitUntil(randomNumber);
+    }
+
+    private async waitUntil(milliseconds: number) {
+        return await new Promise(resolve => {
+            setInterval(() => {
+                resolve('');
+            }, milliseconds);
+        });
+    }
+
+    private random(min: number, max: number): number {
+        return Math.floor(
+            Math.random() * (max - min) + min
+        )
     }
 }
 type Repo = { repo: string, owner: string }
