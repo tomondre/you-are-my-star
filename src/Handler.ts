@@ -9,7 +9,8 @@ export default class Handler {
         this.octokit = await this.login();
         this.logRequestCount();
         const publicEvents = await this.getPublicEvents();
-        await this.starReposInResponse(publicEvents)
+        await this.starReposInResponse(publicEvents);
+        process.exit()
     }
 
     private async starReposInResponse(responses: OctoResponse[]) {
