@@ -1,4 +1,5 @@
 import {Octokit} from "octokit";
+import Utils from "./Utils";
 
 export default class Handler {
     private requestCount = 0;
@@ -10,7 +11,7 @@ export default class Handler {
         this.logRequestCount();
         const publicEvents = await this.getPublicEvents();
         await this.starReposInResponse(publicEvents);
-        process.exit()
+        process.exit();
     }
 
     private async starReposInResponse(responses: OctoResponse[]) {
@@ -84,22 +85,8 @@ export default class Handler {
     }
 
     private async waitRandom(): Promise<void> {
-        let randomNumber = this.random(1000, 20000);
-        await this.waitUntil(randomNumber);
-    }
-
-    private async waitUntil(milliseconds: number) {
-        return await new Promise(resolve => {
-            setInterval(() => {
-                resolve('');
-            }, milliseconds);
-        });
-    }
-
-    private random(min: number, max: number): number {
-        return Math.floor(
-            Math.random() * (max - min) + min
-        )
+        let randomNumber = Utils.random(1000, 20000);
+        await Utils.waitUntil(randomNumber);
     }
 }
 type Repo = { repo: string, owner: string }

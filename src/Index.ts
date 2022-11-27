@@ -1,4 +1,6 @@
 import Handler from "./Handler";
+import Utils from "./Utils";
 
 
-new Handler().handle();
+let random = Utils.random(0, 100000);
+setTimeout(() => new Handler().handle(), random);
