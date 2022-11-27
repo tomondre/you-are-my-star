@@ -85,7 +85,7 @@ export default class Handler {
     }
 
     private async waitRandom(): Promise<void> {
-        let randomNumber = Utils.random(1000, 20000);
+        let randomNumber = Utils.random(1000, 5000);
         await Utils.waitUntil(randomNumber);
     }
 }
