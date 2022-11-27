@@ -13,7 +13,7 @@ module "star_deployment" {
   image_tag = var.image_tag
   image_url = "docker.io/tomondre/you-are-my-star"
   name      = "you-are-my-star"
-  cron      = "*/30 * * * *"
+  cron      = "*/10 * * * *"
   env       = {
     GITHUB_TOKEN = var.github_token
   }
