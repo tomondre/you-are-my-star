@@ -6,5 +6,5 @@ let random = Utils.random(0, 10000);
 setTimeout(async () => {
     await new Handler().handle();
     await new Handler().handle();
-    await new Handler().handle();
+    process.exit();
 }, random);
