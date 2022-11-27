@@ -20,6 +20,8 @@ export default class Handler {
             if (!await this.isRepoAlreadyStared(repo)) {
                 await this.waitRandom();
                 await this.starRepo(repo);
+            } else {
+                console.log(`Already starred> ${JSON.stringify(repo)}`)
             }
         }
         this.logRequestCount();
